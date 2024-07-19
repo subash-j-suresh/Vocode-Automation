@@ -1,49 +1,41 @@
 from flask import Blueprint, jsonify, request
 from automation_clients.pylon_client import PylonClient
-from error_handler.exception_handlers import webhook_exception_handler
-
-attio_deal_modified_wh = Blueprint("attio_to_pylon", __name__)
+from webhook_manager.webhook_handler_registry import register_webhook_handler
 
 
-@attio_deal_modified_wh.route("/webhook", methods=["POST"])
-@webhook_exception_handler
-def update_deal_info_to_pylon():
-    attio_data = request.json
-    if not attio_data:
-        return jsonify({"error": "Invalid data"}), 400
-
-    company_name = attio_data.get("company_name")
+@register_webhook_handler(
+    endpoint="deal_info", expected_keys=["company_name", "deal_size", "deal_stage"]
+)
+async def update_deal_info_to_pylon(webhook_payload):
+    company_name = webhook_payload.get("company_name")
     pylon_client = PylonClient()
     account = pylon_client.get_account(company_name)
 
     payload = {
         "custom_fields": [
-            {"slug": "deal_size", "value": attio_data.get("deal_size")},
-            {"slug": "deal_stage", "value": attio_data.get("deal_stage")},
+            {"slug": "deal_size", "value": webhook_payload.get("deal_size").lower()},
+            {"slug": "deal_stage", "value": webhook_payload.get("deal_stage").lower()},
         ]
     }
 
     pylon_client.update_account(account["id"], payload)
-    return jsonify({"status": "success"}), 200
 
 
-@attio_deal_modified_wh.route("/webhook1", methods=["POST"])
-@webhook_exception_handler
-def update_support_plan_info_to_pylon():
-    attio_data = request.json
-    if not attio_data:
-        return jsonify({"error": "Invalid data"}), 400
-
-    company_name = attio_data.get("company_name")
+@register_webhook_handler(
+    endpoint="support_plan", expected_keys=["company_name", "support_plan"]
+)
+async def update_support_plan_info_to_pylon(webhook_payload):
+    company_name = webhook_payload.get("company_name")
     pylon_client = PylonClient()
     account = pylon_client.get_account(company_name)
 
     payload = {
         "custom_fields": [
-            {"slug": "support_plan", "value": attio_data.get("support_plan")}
+            {
+                "slug": "support_plan",
+                "value": webhook_payload.get("support_plan").lower(),
+            }
         ]
     }
 
     pylon_client.update_account(account["id"], payload)
-
-    return jsonify({"status": "success"}), 200
