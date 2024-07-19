@@ -1,5 +1,5 @@
-from error_handler.custom_exceptions.automation_exception import AutomationException
-from error_handler.error_type import ErrorTypes
+from exception_manager.custom_exceptions.automation_exception import AutomationException
+from exception_manager.error_types import ErrorTypes
 
 
 class PylonException(AutomationException):

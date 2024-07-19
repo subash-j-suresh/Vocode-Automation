@@ -1,5 +1,5 @@
 from quart import Blueprint, request, jsonify
-from error_handler.exception_handlers import webhook_exception_handler
+from exception_manager.exception_handlers import webhook_exception_handler
 from webhook_manager.webhook_handler_registry import get_handler
 
 webhook_listener = Blueprint("webhook_listener", __name__)

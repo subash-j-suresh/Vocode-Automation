@@ -2,8 +2,8 @@ import requests
 import os
 
 from automation_clients.base_client import BaseClient
-from error_handler.custom_exceptions.http_exception import HTTPException
-from error_handler.custom_exceptions.pylon_exception import PylonException
+from exception_manager.custom_exceptions.http_exception import HTTPException
+from exception_manager.custom_exceptions.pylon_exception import PylonException
 
 
 class PylonClient(BaseClient):

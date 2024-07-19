@@ -1,6 +1,6 @@
 from functools import wraps
 import logging
-from error_handler.error_type import ErrorTypes
+from exception_manager.error_types import ErrorTypes
 from loggers.slack_logger import get_slack_logger
 
 
