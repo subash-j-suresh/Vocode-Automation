@@ -8,7 +8,7 @@ class AttioClient(BaseClient):
         pass
 
     @classmethod
-    def get_api_key(cls):
+    def get_api_key(cls) -> str:
         return os.getenv("ATTIO_API_KEY")
 
     @classmethod

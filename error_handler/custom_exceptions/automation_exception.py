@@ -17,21 +17,3 @@ class AutomationException(Exception):
 
     def __str__(self) -> str:
         return f"Error Code: {self.code}\nError Message: {self.message}"
-
-
-# decorator to handle and log exceptions during an automation task.
-def handle_automation_exceptions(func):
-    logger = get_slack_logger()
-
-    @wraps(func)
-    def wrapper(*args, **kwargs):
-        try:
-            func()
-        except AutomationException as e:
-            logger.log(level=logging.ERROR, msg=str(e))
-        except Exception as e:
-            logger.log(
-                level=logging.ERROR, msg=str(AutomationException(-1, error_message=e))
-            )
-
-    return wrapper
