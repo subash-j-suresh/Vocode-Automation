@@ -1,5 +1,6 @@
 import os
-from AutomationClients.BaseClient import BaseClient
+from automation_clients.base_client import BaseClient
+
 
 class AttioClient(BaseClient):
     def __init__(self) -> None:
@@ -8,8 +9,8 @@ class AttioClient(BaseClient):
 
     @classmethod
     def get_api_key(cls):
-        return os.getenv('ATTIO_API_KEY')
-    
+        return os.getenv("ATTIO_API_KEY")
+
     @classmethod
     def get_auth_token(cls):
         pass

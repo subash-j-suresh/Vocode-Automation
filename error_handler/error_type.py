@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class ErrorTypes(Enum):
     HTTP_ERROR = "HTTP Error"
     PYLON_ERROR = "Error when handling pylon"
