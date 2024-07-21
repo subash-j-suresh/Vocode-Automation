@@ -36,7 +36,7 @@ class PylonClient(BaseClient):
         account = next((acc for acc in accounts if acc["name"] == account_name), None)
         if account is None:
             raise PylonException(
-                -1, "Account not found in python, please check your company name input"
+                -1, "Account not found in pylon, please check your company name input"
             )
         return account
 

@@ -1,4 +1,3 @@
-from flask import Blueprint, jsonify, request
 from automation_clients.pylon_client import PylonClient
 from webhook_manager.webhook_handler_registry import register_webhook_handler
 
