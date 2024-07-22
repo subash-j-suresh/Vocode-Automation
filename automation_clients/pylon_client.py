@@ -2,7 +2,6 @@ import requests
 import os
 
 from automation_clients.base_client import BaseClient
-from exception_manager.custom_exceptions.http_exception import HTTPException
 from exception_manager.custom_exceptions.pylon_exception import PylonException
 
 
@@ -43,5 +42,5 @@ class PylonClient(BaseClient):
     def update_account(self, account_id, payload):
         account_url = f"{self.PYLON_ACCOUNTS_URL}/{account_id}"
         response = requests.patch(account_url, json=payload, headers=self.api_headers)
-        HTTPException.check_error(response=response)
+        PylonException.check_http_response(response.status_code, response.json)
         return response

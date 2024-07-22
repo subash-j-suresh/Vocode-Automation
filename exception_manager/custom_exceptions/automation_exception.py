@@ -17,3 +17,8 @@ class AutomationException(Exception):
 
     def __str__(self) -> str:
         return f"Error Code: {self.code}\nError Message: {self.message}"
+
+    @classmethod
+    def check_http_response(cls, status_code, response_data):
+        if status_code not in [200, 201, 202]:
+            raise cls(status_code, response_data)
