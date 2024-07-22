@@ -1,20 +1,19 @@
 import requests
 
-# Your local webhook URL
-webhook_url = "http://localhost:5000/webhook/deal_info"
+deal_data_webhook_url = "http://localhost:5000/webhook/deal_info"
+# support_plan_webhook_url = "http://localhost:5000/webhook/support_plan"
 
 # Data to be sent in the POST request
-data = {
-    "company_name": "anotherandomboy@gmail.com",
+deal_data = {
+    "company_name": "Subash_TestCompany",
     "deal_size": "xl",
     "deal_stage": "discovery",
 }
 
-# data = {"company_name": "xyz", "support_plan": "Community"}
+# support_plan_data = {"company_name": "Subash_TestCompany", "support_plan": "Free"}
 
-# Send the POST request to the webhook URL
-response = requests.post(webhook_url, json=data)
+response = requests.post(deal_data_webhook_url, json=deal_data)
+# response = requests.post(support_plan_data, json=support_plan_data)
 
-# Print the response status code and response content
 print(f"Response status code: {response.status_code}")
 print(f"Response content: {response.content}")
