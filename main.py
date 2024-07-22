@@ -5,7 +5,7 @@ from utilities import import_packages
 from webhook_manager.webhook_listener import webhook_listener
 
 # Importing some packages before getting started.
-packages_to_import_early = ["webhook_manager", "automations"]
+packages_to_import_early = ["webhook_manager", "automations", "loggers"]
 import_packages(packages_to_import_early)
 
 app = Quart(__name__)

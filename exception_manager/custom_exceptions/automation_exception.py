@@ -1,7 +1,4 @@
-from functools import wraps
-import logging
 from exception_manager.error_types import ErrorTypes
-from loggers.slack_logger import get_slack_logger
 
 
 class AutomationException(Exception):
