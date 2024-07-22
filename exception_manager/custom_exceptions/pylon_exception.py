@@ -11,4 +11,4 @@ class PylonException(AutomationException):
         )
 
     def __str__(self) -> str:
-        return super().__str__()
+        return f"Pylon Exception Occured:\n{super().__str__()}"
