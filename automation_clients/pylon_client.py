@@ -25,7 +25,7 @@ class PylonClient(BaseClient):
         if response.status_code != 200:
             raise PylonException(
                 -1,
-                "Failed to retrive the pylon accounts request returned error code: {response.status_code}",
+                f"Failed to retrive the pylon accounts request returned error code: {response.status_code}",
             )
 
         return response.json().get("data", [])
@@ -35,12 +35,12 @@ class PylonClient(BaseClient):
         account = next((acc for acc in accounts if acc["name"] == account_name), None)
         if account is None:
             raise PylonException(
-                -1, "Account not found in pylon, please check your company name input"
+                -1, f"Account name: '{account_name}' not found in pylon, please check your company name input"
             )
         return account
 
     def update_account(self, account_id, payload):
         account_url = f"{self.PYLON_ACCOUNTS_URL}/{account_id}"
         response = requests.patch(account_url, json=payload, headers=self.api_headers)
-        PylonException.check_http_response(response.status_code, response.json)
+        PylonException.check_http_response(response.status_code, response.json())
         return response
